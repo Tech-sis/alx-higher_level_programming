@@ -7,19 +7,25 @@
 
 int check_cycle(listint_t *list)
 {
-	listint_t *current;
+	listint_t *current = list;
+	listint_t *last = list;
 
 	if (list == NULL)
 		return (0);
 
-	current = list->next;
-
-	while (current != NULL)
+	while (1)
 	{
-		if (current == list)
-			return (1);
-		current = current->next;
-	}
+		if (current->next != NULL && current->next->next != NULL)
+		{
+			current = current->next->next;
+			last = last->next;
 
-	return (0);
+			if (current == last)
+			{
+				return (1);
+			}
+		}
+		else
+			return (0);
+	}
 }
