@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
-    from sys import argv
-    userin = argv[1:]
-    size = len(userin)
+    import sys
+    size = len(sys.argv)
     print("{:d} {:s}{:s}".
           format(size,
                  "arguments" if (size) != 1 else "argument",
                  "." if (size) == 0 else ":"))
-    for i, arg in enumerate(userin):
-        print("{:d}: {:s}".format(i + 1, arg))
+    for i in range(size):
+        print("{:d}: {:s}".format(i + 1, sys.argv[i]))
