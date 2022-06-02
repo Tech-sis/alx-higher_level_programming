@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
-    import sys
-    total = len(sys.argv)
+    from sys import argv
+    userInput = argv[1:]
+    total = len(userInput)
     if total <= 1:
         print("0 arguments.")
     else:
@@ -10,4 +11,4 @@ if __name__ == "__main__":
         else:
             print("{:d} arguments:".format(total - 1))
         for i in range(1, total):
-            print("{:d}: {}".format(i, sys.argv[i]))
+            print("{:d}: {}".format(i, userInput))
