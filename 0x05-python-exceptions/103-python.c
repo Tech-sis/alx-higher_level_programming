@@ -1,99 +1,99 @@
-#include "/usr/include/python3.4/Python.h"
+#include <Python.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <object.h>
+#include <listobject.h>
+#include <bytesobject.h>
+#include <floatobject.h>
+#include <string.h>
 
-void print_hexn(const char *str, int n);
-void print_python_float(PyObject *p);
-void print_python_bytes(PyObject *p);
-void print_python_list(PyObject *p);
-
-void print_hexn(const char *str, int n)
-{
-	int i = 0;
-
-	for (; i < n - 1; ++i)
-		printf("%02x ", (unsigned char)str[i]);
-
-	printf("%02x", str[i]);
-	fflush(stdout);
-}
-
-void print_python_bytes(PyObject *p)
-{
-	PyBytesObject *clone = (PyBytesObject *)p;
-	int calc_bytes, clone_size = 0;
-
-	printf("[.] bytes object info\n");
-	if (!PyBytes_Check(p))
-	{
-		printf("  [ERROR] Invalid Bytes Object\n");
-		return;
-	}
-
-	clone_size = PyBytes_Size(p);
-	calc_bytes = clone_size + 1;
-
-	if (calc_bytes >= 10)
-		calc_bytes = 10;
-
-	printf("  size: %d\n", clone_size);
-	printf("  trying string: %s\n", clone->ob_sval);
-	printf("  first %d bytes: ", calc_bytes);
-	print_hexn(clone->ob_sval, calc_bytes);
-	printf("\n");
-
-	fflush(stdout);
-}
-
-void print_python_list(PyObject *p)
-{
-	int i = 0, list_len = 0;
-	PyObject *item;
-	PyListObject *clone = (PyListObject *)p;
-
-	printf("[*] Python list info\n");
-	if (!PyList_Check(p))
-	{
-		printf("  [ERROR] Invalid List Object\n");
-		return;
-	}
-
-	list_len = PyList_GET_SIZE(p);
-	printf("[*] Size of the Python List = %d\n", list_len);
-	printf("[*] Allocated = %d\n", (int)clone->allocated);
-
-	for (; i < list_len; ++i)
-	{
-		item = PyList_GET_ITEM(p, i);
-		printf("Element %d: %s\n", i, item->ob_type->tp_name);
-
-		if (PyBytes_Check(item))
-			print_python_bytes(item);
-		else if (PyFloat_Check(item))
-			print_python_float(item);
-	}
-
-	fflush(stdout);
-}
-
+/**
+ * print_python_float - print some basic infor about Python
+ * float objects
+ * @p: pointer to PyObject p
+ */
 void print_python_float(PyObject *p)
 {
-	PyFloatObject *clone = (PyFloatObject *)p;
-	float n = 0;
+	double d;
+	char *s = NULL;
 
 	printf("[.] float object info\n");
 	if (!PyFloat_Check(p))
 	{
 		printf("  [ERROR] Invalid Float Object\n");
+		fflush(stdout);
 		return;
 	}
+	d = ((PyFloatObject *)(p))->ob_fval;
+	s = PyOS_double_to_string(d, 'r', 0, Py_DTSF_ADD_DOT_0, NULL);
+	printf("  value: %s\n", s);
+	fflush(stdout);
+}
 
-	n = clone->ob_fval;
+/**
+ * print_python_bytes - print some basic info about Python
+ * byte objects
+ * @p: pointer to PyObject p
+ */
+void print_python_bytes(PyObject *p)
+{
+	size_t i, bytes;
+	char *str = NULL;
 
-	if ((int)n == n)
-		printf("  value: %0.1f\n", clone->ob_fval);
+	printf("[.] bytes object info\n");
+	if (!PyBytes_Check(p))
+	{
+		printf("  [ERROR] Invalid Bytes Object\n");
+		fflush(stdout);
+		return;
+	}
+	str = ((PyBytesObject *)(p))->ob_sval;
+	bytes = PyBytes_Size(p);
+	printf("  size: %ld\n", bytes);
+	printf("  trying string: %s\n", str);
+	if (bytes >= 10)
+		bytes = 10;
 	else
-		printf("  value: %0.16g\n", clone->ob_fval);
+		bytes++;
+	printf("  first %ld bytes: ", bytes);
+	for (i = 0; i < bytes - 1; i++)
+		printf("%02hhx ", str[i]);
+	printf("%02hhx", str[i]);
+	printf("\n");
+	fflush(stdout);
+}
 
+/**
+ * print_python_list - print some basic info about Python lists
+ * @p: pointer to PyObject p
+ */
+void print_python_list(PyObject *p)
+{
+	size_t i, allocated, size;
+	const char *dataType;
+	PyListObject *list;
+
+	printf("[*] Python list info\n");
+	if (!PyList_Check(p))
+	{
+		printf("  [ERROR] Invalid List Object\n");
+		fflush(stdout);
+		return;
+	}
+	list = (PyListObject *)p;
+	size = PyList_GET_SIZE(p);
+	allocated = list->allocated;
+
+	printf("[*] Size of the Python List = %ld\n", size);
+	printf("[*] Allocated = %li\n", allocated);
+	for (i = 0; i < size; i++)
+	{
+		dataType = (list->ob_item[i])->ob_type->tp_name;
+		printf("Element %li: %s\n", i, dataType);
+		if (strcmp(dataType, "bytes") == 0)
+			print_python_bytes(list->ob_item[i]);
+		else if (strcmp(dataType, "float") == 0)
+			print_python_float(list->ob_item[i]);
+	}
 	fflush(stdout);
 }
