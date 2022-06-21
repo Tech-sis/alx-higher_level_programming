@@ -47,20 +47,27 @@ class Square:
         """calculates the square area
         """
         return (self.size ** 2)
-    
+
     def __str__(self):
+        """
+        String representation of square so call to print works
+        Example: print(my_square)
+        """
         txt = ''
         if (self.__size == 0):
-            pass
-        else:
-            for i in range(self.position[1]):
-                txt += '\n'
-                
-            for i in range(self.size):
-                txt += ' ' * self.position[0] + '#' * self.size
+            return txt
+
+        txt += '\n' * self.position[1]
+        txt += '\n'.join([" " * self.__position[0] + "#" *
+                         self.__size for rows in range(self.__size)])
         return txt
 
     def my_print(self):
         """prints a square  with the corresponding size
         """
-        print(self.__str__())
+        if (self.__size == 0):
+            return txt
+
+        print('\n' * self.position[1], end="")
+        print('\n'.join([" " * self.__position[0] + "#" *
+                         self.__size for rows in range(self.__size)]))
