@@ -5,6 +5,8 @@ This module defines a Singly linked list
 
 
 class Node:
+    """Node implementation
+    """
     def __init__(self, data, next_node=None):
         """Defines a node for a singly linked list
         """
@@ -34,6 +36,8 @@ class Node:
 
 
 class SinglyLinkedList:
+    """SinglyLinkedList implementation
+    """
     def __init__(self):
         """Defines the singly linked list
         """
