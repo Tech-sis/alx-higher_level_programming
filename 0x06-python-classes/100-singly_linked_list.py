@@ -47,27 +47,11 @@ class SinglyLinkedList:
         if self.__head is None:
             self.__head = Node(value)
         else:
-            current = self.__head
-            previous = None
-            while current and value > current.data:
-                previous = current
-                current = current.next_node
-            if current is None:
-                previous.next_node = Node(value)
-            elif current is self.__head and previous is None:
-                self.__head = Node(value, current)
-            else:
-                newNode = Node(value, current)
-                previous.next_node = newNode
-
-    def __repr__(self):
-        node = self.__head
-        txt = ''
-        while 1:
-            txt += str(node.data)
-            node = node.next_node
-            if node.next_node is None:
-                break
-            else:
-                txt += '\n'
-        return txt
+            for sym in range(0, self.position[1]):
+                print("")
+            for sym in range(0, self.__size):
+                for char in range(0, self.position[0]):
+                    print(" ", end="")
+                for char in range(0, self.__size - 1):
+                    print("#", end="")
+                print("#")
