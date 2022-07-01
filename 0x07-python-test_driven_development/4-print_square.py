@@ -5,9 +5,6 @@ The function prints a squre
 """
 
 
-from math import floor
-
-
 def print_square(size):
     """prints a square
         Args:
@@ -18,17 +15,12 @@ def print_square(size):
     Returns:
         str: prints a square with character #
     """
-    if type(size) != int:
-        raise TypeError('size must be an integer')
-    elif size < 0:
-        raise ValueError('size must be >= 0')
-    elif type(size) == float and size < 0:
-        raise TypeError('size must be an integer')
 
-    if (size == 0):
-        print('')
-    if (type(size) == float):
-        floor(size)
+    if not isinstance(size, int):
+        raise TypeError("size must be an integer")
+    if size < 0:
+        raise ValueError("size must be >= 0")
 
     for i in range(size):
-        print('#' * size)
+        [print("#", end="") for j in range(size)]
+        print("")
