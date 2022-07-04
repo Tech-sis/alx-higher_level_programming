@@ -58,6 +58,12 @@ Test non-ints:
     TypeError: checkme must be an integer
 
     >>> bg = BaseGeometry()
+    >>> bg.integer_validator("checkme", (1, 2, 3))
+    Traceback (most recent call last):
+    ...
+    TypeError: checkme must be an integer
+
+    >>> bg = BaseGeometry()
     >>> bg.integer_validator("checkme", {"key": 1})
     Traceback (most recent call last):
     ...
