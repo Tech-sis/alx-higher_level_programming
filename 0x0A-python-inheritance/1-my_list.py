@@ -1,12 +1,15 @@
 #!/usr/bin/python3
+"""
+This module implements a custom list object
+"""
+
+
 class MyList(list):
-    """A derived class MyList of base clase list"""
+    """Custom List
+    """
 
     def print_sorted(self):
         """
-            Prints list in ascending order.
-                Returns:
-                    list (int): List in ascending order
+        prints the list, but sorted (ascending sort)
         """
-
-        return self.sort()
+        print(sorted(self))
