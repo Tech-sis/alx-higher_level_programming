@@ -8,10 +8,10 @@ with instantiation of private attributes width and height, validated by parent
 """
 
 
-BaseGeometry = __import__('7-base_geometry').BaseGeometry
+Rectangle = __import__('9-rectangle').BaseGeometry
 
 
-class Square(BaseGeometry):
+class Square(Rectangle):
     """inherits from BaseGeometry
     Methods:
         __init__(self, size)
@@ -22,6 +22,5 @@ class Square(BaseGeometry):
         Args:
             size (int): private
         """
-        self.integer_validator("size", size)
         super().__init__(size, size)
         self.__size = size
