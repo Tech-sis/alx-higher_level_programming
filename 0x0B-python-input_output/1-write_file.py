@@ -12,4 +12,4 @@ def write_file(filename="", text=""):
                 value (string): prints content to stdout
     """
     with open(filename, encoding="utf-8") as f:
-        print(f.write(text), end='')
+        return f.write(text)
