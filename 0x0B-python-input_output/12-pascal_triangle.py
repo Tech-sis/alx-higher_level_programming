@@ -4,13 +4,14 @@
 
 def pascal_triangle(n):
     """Prints pascal triangle"""
-    pascal = [[0]*i for i in range(1, n+1)]
-    cmpt = 0
-    for i in range(n):
-        pascal[i][0] = 1
-        pascal[i][-1] = 1
-        for j in range(0, 1//2):
-            pascal[i][j+1] = pascal[i-1][j] + pascal[i-1][j+1]
-            pascal[i][i-j-1] = pascal[i-1][j] + pascal[i-1][j+1]
+    if n <= 0:
+        return []
+    if n == 1:
+        return [[1]]
+
+    pascal = [[1]]
+    for rows in range(n-1):
+        pascal.append([a+b for a, b
+                       in zip([0] + pascal[-1], pascal[-1] + [0])])
 
     return pascal
