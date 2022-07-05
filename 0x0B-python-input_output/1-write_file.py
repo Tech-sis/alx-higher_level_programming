@@ -6,7 +6,7 @@ This module opens a file and print it to stdout
 
 def write_file(filename="", text=""):
     """
-    This function opens a file and print its content
+    This function writes to a file and print its content
             Parameters:
                 filename (string): A string that holds a filename
                 value (string): prints content to stdout
