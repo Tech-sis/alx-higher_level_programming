@@ -2,9 +2,6 @@
 """This module defines a class student"""
 
 
-from numpy import isin
-
-
 class Student:
     """
         Instantiating the instance methods of the class
