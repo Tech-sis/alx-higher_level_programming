@@ -15,4 +15,4 @@ def load_from_json_file(filename):
                 value (string): returns python data structure
     """
     with open(filename, 'w', encoding="utf-8") as f:
-        f.write(json.loads())
+        f.write(json.loads(filename))
