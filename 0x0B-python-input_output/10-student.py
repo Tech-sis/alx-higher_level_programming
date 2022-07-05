@@ -22,8 +22,5 @@ class Student:
                 return self.__dict__
         dictionary = {}
         for index in attrs:
-            try:
-                dictionary[index] = self.__dict__[index]
-            except:
-                pass
+            dictionary[index] = self.__dict__[index]
         return dictionary
