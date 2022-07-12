@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# Base = __import__('models/base.py').Base
 from models.base import Base
 
 
