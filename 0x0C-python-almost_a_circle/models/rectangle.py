@@ -1,9 +1,17 @@
 #!/usr/bin/python3
-"""This module implements the Rectangle class."""
+"""
+This module implements the Rectangle class.
+"""
+
+
 from models.base import Base
 
 
 class Rectangle(Base):
+    """
+    The following are getters and setters for the Rectangle class.
+    """
+
     def __init__(self, width, height, x=0, y=0, id=None):
         ''''Initializes the class Rectangle'''
         self.__width = width
