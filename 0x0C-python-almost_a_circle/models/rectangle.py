@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""This module implements the Rectangle class."""
 from models.base import Base
 
 
