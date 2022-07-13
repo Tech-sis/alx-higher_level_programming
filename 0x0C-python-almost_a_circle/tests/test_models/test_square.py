@@ -316,6 +316,7 @@ class TestSquare_order_of_initialization(unittest.TestCase):
             Square(1, "invalid x", "invalid y")
 
 
+
 class TestSquare_area(unittest.TestCase):
     """Unittests for testing the area method of the Square class."""
 

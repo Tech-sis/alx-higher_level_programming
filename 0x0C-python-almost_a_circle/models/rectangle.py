@@ -14,10 +14,32 @@ class Rectangle(Base):
 
     def __init__(self, width, height, x=0, y=0, id=None):
         ''''Initializes the class Rectangle'''
-        self.__width = width
-        self.__height = height
-        self.__x = x
-        self.__y = y
+        # self.__width = width
+        # self.__height = height
+        # self.__x = x
+        # self.__y = y
+        # super().__init__(id)
+
+        if type(width) != int:
+            raise TypeError("width must be an integer")
+        if width <= 0:
+            raise ValueError("width must be > 0")
+        self.width = width
+        if type(height) != int:
+            raise TypeError("height must be an integer")
+        if height <= 0:
+            raise ValueError("height must be > 0")
+        self.height = height
+        if type(x) != int:
+            raise TypeError("x must be an integer")
+        if x < 0:
+            raise ValueError("x must be >= 0")
+        self.x = x
+        if type(y) != int:
+            raise TypeError("y must be an integer")
+        if y < 0:
+            raise ValueError("y must be >= 0")
+        self.y = y
         super().__init__(id)
 
     @property
