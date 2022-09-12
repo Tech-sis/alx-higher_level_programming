@@ -2,19 +2,17 @@
 Python file to create class definition of a State and
 an instance Base = declarative_base()
 """
-""" Importing modules """
-
-""" Creating class """
-
-
-
-
 from model_state import Base, State
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
+
+""" Creating class """
+
+
 class City(Base):
     """ Class City """
+
     __tablename__ = 'cities'
     id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
     name = Column(String(128), nullable=False)
