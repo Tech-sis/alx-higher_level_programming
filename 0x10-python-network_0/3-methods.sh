@@ -1,3 +1,3 @@
 #!/bin/bash
 # displays methods
-curl -sI "$1" | grep Allow | cut -d " " -f2-
+curl -sI "$1" -X OPTIONS | grep "Allow:" | cut -d ":" -f2 | sed 's/ //'

@@ -1,3 +1,3 @@
 #!/bin/bash
 # send get request and display body
-curl -sH "X-School-User-Id: 98" "$1" 
+curl -s "$1" -X GET -H "X-School-User-Id: 98" 
