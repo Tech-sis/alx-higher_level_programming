@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
-Take in a URL, send a POST request, and display the body of response (decoded in utf-8).
+Take in a URL, send a POST request,
+and display the body of response
+(decoded in utf-8).
 """
 import sys
 from urllib import request, parse
